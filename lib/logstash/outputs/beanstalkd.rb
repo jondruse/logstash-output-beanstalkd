@@ -2,7 +2,7 @@
 require "logstash/outputs/base"
 require "logstash/namespace"
 
-# An example output that does nothing.
+
 class LogStash::Outputs::Beanstalkd < LogStash::Outputs::Base
   config_name "beanstalkd"
 
@@ -26,14 +26,13 @@ class LogStash::Outputs::Beanstalkd < LogStash::Outputs::Base
 
   public
   def register
-    require "beanstalk-client"
-
-    @beanstalk = Beanstalk::Pool.new(["#{@host}:#{@port}"])
-    @beanstalk.use(@tube)
+    require "beaneater"
+    @beanstalk = Beaneater::Pool.new(["#{@host}:#{@port}"])
+    @beanstalk_tube = @beanstalk.tubes.find(@tube)
   end 
 
   public
   def receive(event)
-    @beanstalk.put(event.to_json, @priority, @delay, @ttr)
-  end # def event
-end # class LogStash::Outputs::Example
+    @beanstalk_tube.put(event.to_json, {pri: @priority, delay: @delay, ttr: @ttr})
+  end 
+end 
