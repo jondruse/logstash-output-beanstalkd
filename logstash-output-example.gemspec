@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'logstash-output-beanstalkd'
-  s.version         = '0.9.0'
+  s.version         = '0.9.1'
   s.licenses = ['Apache License (2.0)']
   s.summary = "This output will put jobs onto a beanstalkd tube"
   s.description = "This gem is a logstash plugin required to be installed on top of the Logstash core pipeline using $LS_HOME/bin/plugin install gemname. This gem is not a stand-alone program"
@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.metadata = { "logstash_plugin" => "true", "logstash_group" => "output" }
 
   # Gem dependencies
-  s.add_runtime_dependency "logstash-core", '>= 1.4.0', '< 2.0.0'
+  s.add_runtime_dependency "logstash-core", '>= 1.4.0'
   s.add_runtime_dependency "beaneater", '0.3.3'
   s.add_development_dependency 'logstash-devutils'
 end
